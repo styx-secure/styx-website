@@ -1,2 +1,5 @@
 Contact: mailto:security@styxsecure.org
-Preferred-Languages: en
+Expires: 2027-07-11T00:00:00.000Z
+Canonical: https://styxsecure.org/.well-known/security.txt
+Policy: https://styxsecure.org/security.html
+Preferred-Languages: en, it
