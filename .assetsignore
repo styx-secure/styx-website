@@ -1,8 +1,6 @@
-.git
-.git/**
-.gitignore
-.assetsignore
-.wrangler
-.wrangler/**
-wrangler.jsonc
-LICENSE
+/*
+!/index.html
+!/styles.css
+!/assets
+!/demo
+!/.well-known
