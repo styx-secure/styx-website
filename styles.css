@@ -113,10 +113,18 @@ a:focus-visible {
 
 .header-cta {
   justify-self: end;
-  padding-bottom: 3px;
-  border-bottom: 1px solid var(--river);
+  padding: 10px 15px;
+  color: var(--obsidian);
+  background: var(--river);
+  border: 1px solid var(--river);
+  border-radius: 999px;
   font-size: .84rem;
   font-weight: 700;
+}
+
+.header-cta:hover {
+  color: var(--foam);
+  background: transparent;
 }
 
 .hero {
@@ -1069,6 +1077,7 @@ footer > div a:hover {
   }
 
   .header-cta {
+    padding: 8px 11px;
     font-size: .72rem;
   }
 
