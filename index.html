@@ -19,6 +19,7 @@
     </a>
     <nav aria-label="Primary navigation">
       <a href="demo/">Interactive demo</a>
+      <a href="#progress">Progress</a>
       <a href="#architecture">Architecture</a>
       <a href="#flegias">Flegias</a>
       <a href="#evidence">Evidence</a>
@@ -54,7 +55,7 @@
           <span>Experimental foundation</span>
         </div>
         <h2>Flegias by Styx</h2>
-        <p>The planned first vertical: confidential case intake and ongoing
+        <p>The planned lead vertical: confidential case intake and ongoing
           dialogue without requiring an email address, phone number, or
           ordinary account.</p>
         <p class="status-warning"><strong>Not ready for live reporting.</strong>
@@ -71,6 +72,69 @@
         state, evidence, roles, recovery, and follow-up matter.</p>
       <p><span>03 / Evidence</span> Every security and maturity claim is bounded
         by what the repository can demonstrate today.</p>
+    </section>
+
+    <section class="section progress" id="progress" aria-labelledby="progress-title">
+      <div class="section-label">Latest progress · October 2026</div>
+      <div class="progress-heading">
+        <h2 id="progress-title">Encrypted messages, real networks,<br>nothing for the relay to read.</h2>
+        <p>Styx now carries end-to-end encrypted messages between machines on
+          different networks over public Nostr relays, delivers them through
+          failures, and turns away an outside attacker. Here is the recorded
+          test run.</p>
+      </div>
+      <div class="progress-layout">
+        <figure class="progress-video">
+          <video controls preload="metadata" playsinline width="1280" height="720"
+            poster="assets/media/2026-10-m3-test-run-poster.png"
+            aria-describedby="progress-video-caption">
+            <source src="assets/media/2026-10-m3-test-run.mp4" type="video/mp4">
+            <p>Your browser cannot play this video.
+              <a href="assets/media/2026-10-m3-test-run.mp4">Download the MP4</a> (2.9 MB).</p>
+          </video>
+          <figcaption id="progress-video-caption">Recorded test run, 100 seconds, no sound,
+            synthetic data. Every scene is labelled on screen with the run it comes from.
+            <a href="assets/media/2026-10-m3-test-run.mp4" download>Download the MP4 (2.9 MB)</a></figcaption>
+          <details class="progress-transcript">
+            <summary>Text description of the recording</summary>
+            <ol>
+              <li><strong>Encrypted message across two networks.</strong> Alice, on one
+                network, sends a message to three public relays. Bob, on another network,
+                receives the encrypted event, decrypts it and reads the text. Alice gets
+                Bob's signed receipt.</li>
+              <li><strong>What the relay operator sees.</strong> A captured relay frame
+                with TLS removed: the content is MLS ciphertext. Next to it, the text Bob
+                reads after decryption, which only a group member can do.</li>
+              <li><strong>Faults.</strong> Alice loses one relay; another relay carries the
+                message. Then her network stalls; she keeps the message queued, retries,
+                and it is delivered and acknowledged.</li>
+              <li><strong>An attacker from outside.</strong> Mallory runs on a server
+                outside both networks, reads the public relays and holds no group key. She
+                replays a message (not delivered a second time), alters one (two relays
+                refuse it; her re-signed copy is discarded), injects her own (discarded)
+                and forges a delivery receipt (Alice ignores it: only Bob can sign Bob's
+                receipt).</li>
+              <li><strong>Summary.</strong> Four messages sent, four received; the relays
+                saw message content only as ciphertext; nothing Mallory published reached
+                the application.</li>
+            </ol>
+          </details>
+        </figure>
+        <ul class="progress-points">
+          <li><span>01</span><div><h3>Across real networks</h3><p>Two machines on different networks exchanged MLS-encrypted messages over three public Nostr relays.</p></div></li>
+          <li><span>02</span><div><h3>Ciphertext is all the relay gets</h3><p>With TLS removed, exactly what a relay operator receives, the content is MLS ciphertext, byte-identical at both ends.</p></div></li>
+          <li><span>03</span><div><h3>Delivery through failures</h3><p>A relay cut off, the sender's network stalled: the message was queued, retried, delivered and acknowledged.</p></div></li>
+          <li><span>04</span><div><h3>Attacker turned away</h3><p>Replay, tampering, injection and a forged receipt from outside: nothing she published reached the application.</p></div></li>
+          <li><span>05</span><div><h3>Ahead of plan</h3><p>Milestone 1 complete. Milestone 2 at 31 of 41 tasks, 1,514 of 1,514 tests passing. Milestone 3 started early.</p></div></li>
+        </ul>
+      </div>
+      <p class="progress-why"><strong>Why it matters.</strong> Whistleblowers,
+        journalists and the people who handle their cases need to work over
+        infrastructure anyone can run, without trusting whoever runs it with their
+        words. This delivery layer is the base for Flegias, our Milestone 4 goal.</p>
+      <p class="progress-limits">Limits: synthetic data · prototype test harness, not
+        yet the SDK client · one sample per attack · pre-audit.</p>
+      <a class="text-link on-dark" href="https://github.com/styx-secure/styx#latest-progress--october-2026" target="_blank" rel="noopener noreferrer">Read the progress notes in the repository <span aria-hidden="true">↗</span></a>
     </section>
 
     <section class="section mission" id="mission" aria-labelledby="mission-title">
@@ -218,14 +282,15 @@
         <p>These are proposed engineering outputs, not delivery promises. Each
           security-sensitive change remains subject to a bounded contract,
           independent review, exact tests, and human approval.</p>
+        <p class="roadmap-asof">Status as of 19 October 2026.</p>
       </div>
       <ol class="roadmap-list">
-        <li><span>01</span><div><h3>Protocol and conformance</h3><p>The transcript-only synthetic corpus and cross-runtime replay are merged. Remaining protocol decisions, conformance work, and implementation alignment stay separately gated.</p></div></li>
-        <li><span>02</span><div><h3>Secure-session decision</h3><p>Bounded exact-pin proof complete. A supported application adapter, transport scope, persistence and retention policy remain separately gated work.</p></div></li>
-        <li><span>03</span><div><h3>SDK and reliable delivery</h3><p>Separate application semantics from chat and make offline, retry, acknowledgement, and recovery states truthful.</p></div></li>
-        <li><span>04</span><div><h3>Flegias alpha</h3><p>Build text-first accountless case intake, return dialogue, operator roles, revocation, retention, and safety UX.</p></div></li>
-        <li><span>05</span><div><h3>Distribution assurance</h3><p>Strengthen browser release controls and decide a future signed native profile with reproducible operations.</p></div></li>
-        <li><span>06</span><div><h3>Audit and controlled pilot</h3><p>Commission independent review, remediate findings, test procedures, and pilot only within an approved scope.</p></div></li>
+        <li data-state="done"><span>01</span><div><h3>Protocol and conformance <em class="roadmap-status">Milestone 1 closed</em></h3><p>The transcript-only synthetic corpus and cross-runtime replay are merged. Milestone 1 added a bounded application-core interface contract and a Python reference evaluator. Remaining protocol decisions, conformance work, and implementation alignment stay separately gated.</p><p class="roadmap-links"><a href="https://github.com/styx-secure/styx/issues/295" target="_blank" rel="noopener noreferrer">Milestone 1 record <span aria-hidden="true">↗</span></a></p></div></li>
+        <li data-state="active"><span>02</span><div><h3>Secure-session persistence <em class="roadmap-status">In progress</em></h3><p>Milestone 2 saves the MLS session into the encrypted browser vault and restores it after a restart or crash: authenticated records, all-or-nothing commits, a single writer, and restore that fails closed. Core modules are integrated on a review branch: 31 of 41 tasks done, 16 components in, and all 1,514 tests of its 18 suites passing. Browser and fault-injection trials and a closing security review remain. Target: a controlled-beta test profile, not production.</p><p class="roadmap-links"><a href="https://github.com/styx-secure/styx/issues/313" target="_blank" rel="noopener noreferrer">Start act <span aria-hidden="true">↗</span></a><a href="https://github.com/styx-secure/styx/issues/317" target="_blank" rel="noopener noreferrer">Frozen scope <span aria-hidden="true">↗</span></a></p></div></li>
+        <li data-state="active"><span>03</span><div><h3>SDK and reliable delivery <em class="roadmap-status">Started early</em></h3><p>The public SDK interface and the delivery-layer contracts (queue, bounded retries, receipts, multi-relay publishing) are ratified. Implementation started on a separate branch, ahead of its funded milestone: the queue, retry, multi-relay and receipt modules are integrated and already ran in the <a href="#progress">recorded test run</a>.</p><p class="roadmap-links"><a href="https://github.com/styx-secure/styx/issues/400" target="_blank" rel="noopener noreferrer">Early-lane record <span aria-hidden="true">↗</span></a></p></div></li>
+        <li data-state="planned"><span>04</span><div><h3>Flegias alpha</h3><p>Build text-first accountless case intake, return dialogue, operator roles, revocation, retention, and safety UX.</p></div></li>
+        <li data-state="planned"><span>05</span><div><h3>Distribution assurance</h3><p>Strengthen browser release controls and decide a future signed native profile with reproducible operations.</p></div></li>
+        <li data-state="planned"><span>06</span><div><h3>Audit and controlled pilot</h3><p>Commission independent review, remediate findings, test procedures, and pilot only within an approved scope.</p></div></li>
       </ol>
       <a class="button button-dark" href="https://github.com/styx-secure/styx/blob/main/docs/PROJECT_BRIEF.md#proposed-funded-milestones" target="_blank" rel="noopener noreferrer">Review milestones and measures <span aria-hidden="true">↗</span></a>
     </section>

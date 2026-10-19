@@ -789,6 +789,89 @@ h1 em {
   font-size: .86rem;
 }
 
+.roadmap-asof {
+  margin-top: 12px !important;
+  color: var(--river-dark) !important;
+  font-family: var(--mono);
+  font-size: .7rem !important;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.roadmap-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  padding: 3px 9px;
+  border: 1px solid var(--river-dark);
+  border-radius: 999px;
+  color: var(--river-dark);
+  font-family: var(--mono);
+  font-size: .6rem;
+  font-style: normal;
+  letter-spacing: .05em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  vertical-align: .25em;
+  white-space: nowrap;
+}
+
+.roadmap-list li[data-state="done"] .roadmap-status {
+  border-color: var(--deep-current);
+  color: var(--foam);
+  background: var(--deep-current);
+}
+
+.roadmap-list li[data-state="active"] .roadmap-status::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--river-dark);
+  content: "";
+  animation: roadmap-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes roadmap-pulse {
+  50% { opacity: .25; }
+}
+
+.roadmap-list li[data-state="planned"] span,
+.roadmap-list li[data-state="planned"] h3 {
+  color: var(--ink-soft);
+}
+
+.roadmap-list li[data-state="planned"] h3 {
+  font-weight: 400;
+}
+
+.roadmap-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 12px !important;
+  font-family: var(--mono);
+  font-size: .72rem !important;
+}
+
+.roadmap-links a {
+  color: var(--river-dark);
+  text-underline-offset: 3px;
+}
+
+.roadmap-links a:hover,
+.roadmap-links a:focus-visible {
+  color: var(--obsidian);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadmap-list li[data-state="active"] .roadmap-status::before { animation: none; }
+}
+
+@media (forced-colors: active) {
+  .roadmap-status { border: 1px solid CanvasText; }
+}
+
 .button-dark {
   color: var(--foam);
   background: var(--deep-current);
@@ -1173,6 +1256,179 @@ footer > div a:hover {
   .hero-card,
   .button,
   .callout {
+    border: 1px solid CanvasText;
+  }
+}
+
+/* Latest progress (October 2026) */
+.progress {
+  color: var(--foam);
+  background: var(--obsidian);
+}
+
+.progress .section-label {
+  color: var(--river);
+}
+
+.progress-heading {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+
+.progress-heading h2 {
+  margin-bottom: 0;
+}
+
+.progress-heading p {
+  color: var(--mist);
+}
+
+.progress-layout {
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: clamp(36px, 5vw, 72px);
+  align-items: start;
+}
+
+.progress-video {
+  margin: 0;
+}
+
+.progress-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line-dark);
+  border-radius: 6px;
+  background: #0c0e12;
+}
+
+.progress-video figcaption {
+  margin-top: 14px;
+  color: var(--mist);
+  font-size: .84rem;
+}
+
+.progress-video figcaption a,
+.progress-transcript summary {
+  color: var(--river);
+  font-weight: 700;
+}
+
+.progress-video figcaption a {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.progress-transcript {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-dark);
+  color: var(--mist);
+  font-size: .88rem;
+}
+
+.progress-transcript summary {
+  cursor: pointer;
+}
+
+.progress-transcript ol {
+  margin: 14px 0 0;
+  padding-left: 1.3em;
+}
+
+.progress-transcript li + li {
+  margin-top: 10px;
+}
+
+.progress-transcript strong {
+  color: var(--foam);
+}
+
+.progress-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-dark);
+}
+
+.progress-points li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.progress-points span {
+  color: var(--river);
+  font-family: var(--mono);
+  font-size: .68rem;
+  line-height: 2.2;
+}
+
+.progress-points h3 {
+  margin: 0 0 4px;
+  font-family: var(--serif);
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+
+.progress-points p {
+  margin: 0;
+  color: var(--mist);
+  font-size: .88rem;
+}
+
+.progress-why {
+  max-width: 880px;
+  margin: 56px 0 10px;
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.progress-why strong {
+  color: var(--river);
+}
+
+.progress-limits {
+  margin: 0 0 6px;
+  color: var(--mist);
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .03em;
+}
+
+@media (max-width: 980px) {
+  .progress-heading,
+  .progress-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .progress-heading {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .progress-video figcaption a {
+    display: block;
+    margin: 6px 0 0;
+  }
+
+  .progress-why {
+    margin-top: 40px;
+  }
+}
+
+@media (forced-colors: active) {
+  .progress-video video {
     border: 1px solid CanvasText;
   }
 }
